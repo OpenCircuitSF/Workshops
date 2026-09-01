@@ -40,8 +40,8 @@ for your reference:
 2. Install the **PlatformIO IDE** extension from the Extensions marketplace.
 3. Open VS Code once after install and let PlatformIO finish its first-run setup
    (it downloads a Python core — several minutes, needs internet).
-4. Clone or download this repo, open `workshops/programming-leds/firmware/` in
-   VS Code, and run **Build** once. First build downloads the Espressif toolchain and FastLED: ~5 minutes
+4. Clone or download <https://github.com/OpenCircuitSF/Workshops>, open
+   `workshops/programming-leds/firmware/` in VS Code, and run **Build** once. First build downloads the Espressif toolchain and FastLED: ~5 minutes
    and several hundred MB. **Doing this live in class will eat 20 minutes.**
 
 If a student shows up without this done, pair them with someone who did it.

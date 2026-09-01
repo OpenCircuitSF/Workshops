@@ -1,5 +1,7 @@
 # Open Circuit SF — Workshops
 
+<https://github.com/OpenCircuitSF/Workshops>
+
 Workshop material for [Open Circuit SF](https://www.opencircuitsf.com): the
 written guides attendees follow, and the firmware they flash while following
 them.

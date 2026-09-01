@@ -75,8 +75,8 @@ the wrong end and *nothing lights up, with no error message at all*.
 
 **Please do this at home.** It downloads several hundred megabytes and takes
 15–20 minutes on a good connection. Doing it live in the room will eat a third
-of the workshop, and venue WiFi with ten laptops all downloading at once is a
-bad bet.
+of the workshop, and venue WiFi with several laptops all downloading at once
+might be slow.
 
 1. **Install [Visual Studio Code](https://code.visualstudio.com/)** — the free
    code editor from Microsoft.
@@ -87,8 +87,19 @@ bad bet.
    open. PlatformIO downloads its own Python environment on first run — this
    takes several minutes and needs internet. Wait for it to say it's done and
    restart VS Code when it asks.
-4. **Download this project.** Either clone it with git, or use the green
-   **Code → Download ZIP** button on GitHub and unzip it.
+4. **Get the project code** from
+   **[github.com/OpenCircuitSF/Workshops](https://github.com/OpenCircuitSF/Workshops)**.
+
+   Either way works:
+
+   - **Clone it** (keeps it easy to pull updates later):
+
+     ```bash
+     git clone https://github.com/OpenCircuitSF/Workshops.git
+     ```
+
+   - **Or download a ZIP** — click the green **Code** button on that page,
+     choose **Download ZIP**, and unzip it somewhere you can find again.
 5. **Open the firmware folder and build it once.** In VS Code choose
    **File → Open Folder** and select `workshops/programming-leds/firmware`.
 
