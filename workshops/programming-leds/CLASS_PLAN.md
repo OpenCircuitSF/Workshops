@@ -1,7 +1,8 @@
 # Programming LEDs — 60 Minute Class Plan
 
-Instructor guide for the [Programming LEDs](README.md) workshop. Attendees get
-the [README](README.md); the kit list is in [parts.md](parts.md).
+Instructor guide for the [Programming LEDs](README.md) workshop. Send students
+[`STUDENT_GUIDE.md`](STUDENT_GUIDE.md) ahead of time; the kit and assembly steps
+are in [`parts.md`](parts.md).
 
 **Audience:** beginners. No ESP32, no PlatformIO, no LED, no soldering experience assumed.
 **Outcome:** every student flashes an ESP32-C3, lights a WS2812B strip, and changes
@@ -17,15 +18,23 @@ room full of dark strips at minute 45 is a failed class.
 
 ### Kit per student (or per pair)
 
+Kits are **assembled and wired before class** — ESP32-C3 seated in a
+breadboard, WS2812B strip on a wood backing, three jumpers already run to
+`+5V`, `GND`, and GPIO 4. Full bill of materials and assembly steps are in
+[`parts.md`](parts.md).
+
+Students bring only:
+
 | Item | Notes |
 |---|---|
-| ESP32-C3 dev board | `esp32-c3-devkitm-1` or compatible (Seeed XIAO ESP32C3, etc.) |
-| WS2812B strip, ~10 LEDs | Pre-cut, with 3 wires already tinned or terminated |
-| USB-C **data** cable | The #1 class killer is a charge-only cable. Test every one. |
-| 3 × jumper wires or a screw terminal | If not soldering |
 | Laptop | VS Code + PlatformIO **installed before class** |
+| USB-C **data** cable | The #1 class killer is a charge-only cable. Bring spares and test every one. |
 
 ### Pre-class homework email (send 3+ days ahead)
+
+Send [`STUDENT_GUIDE.md`](STUDENT_GUIDE.md) — it covers all of this in the
+students' own language, including the charge-only cable warning. The steps,
+for your reference:
 
 1. Install [VS Code](https://code.visualstudio.com/).
 2. Install the **PlatformIO IDE** extension from the Extensions marketplace.
@@ -66,8 +75,8 @@ If a student shows up without this done, pair them with someone who did it.
 | 0:00 – 0:04 | Hook + what we're building | Demo |
 | 0:04 – 0:11 | Hardware tour + electronics basics | Talk |
 | 0:11 – 0:17 | Serial: one wire, one thing at a time | Talk |
-| 0:17 – 0:24 | Wire it up | Hands-on |
-| 0:24 – 0:34 | PlatformIO: build and upload | Hands-on |
+| 0:17 – 0:22 | Trace the wiring | Hands-on |
+| 0:22 – 0:34 | PlatformIO: build and upload | Hands-on |
 | 0:34 – 0:39 | Serial monitor + baud rate | Hands-on |
 | 0:39 – 0:50 | Change the code (3 exercises) | Hands-on |
 | 0:50 – 0:57 | How it works + why no `delay()` | Talk |
@@ -314,34 +323,56 @@ USB log runs at 115,200 bits/sec and can go both ways.
 
 ---
 
-## 0:17 – 0:24 · Wire it up
+## 0:17 – 0:22 · Trace the wiring
 
-Rules on the whiteboard before anyone touches anything:
+The kits arrive wired, so this is not an assembly step — it is a **reading**
+step, and it is worth every one of these five minutes. Students who can point
+at the three wires and say what each one does will debug their own board later.
 
-1. **Unplug USB before wiring.** Plug in only when the wiring is checked.
-2. **5V → +5V, GND → GND, GPIO 4 → DIN.**
-3. **Follow the arrows on the strip.** DIN end only — this is the pass-along
-   chain from the last segment, so the wrong end means every chip sits waiting
-   for data that never arrives.
-4. Don't let bare 5V and GND touch each other.
+Hand out the kits. Before anyone plugs in USB, have each student put a finger
+on each wire in turn and name it out loud to their neighbor:
 
-Walk the room and check every single connection before anyone plugs in. This is
-worth the four minutes — a shorted board wastes far more.
+1. **`+5V`** — power out of the board, into the strip.
+2. **`GND`** — the return path. Voltage is always a *difference*; without a
+   shared ground the strip has no reference for what a signal even means.
+3. **`Din`** — GPIO 4 to the strip's data input. This is the only one carrying
+   information.
 
-Two things worth mentioning while you walk around, even though this class
+Then point at the labels silkscreened on the strip itself — `+5V`, `Din`, `GND`
+— and make the rule explicit: **trust the labels, never the wire colors.**
+Colors are whatever was in the parts bin.
+
+### Why they didn't have to do this themselves
+
+Worth stating out loud, because it is the pass-along chain from the last
+segment made concrete:
+
+- The strip has an **input end and an output end**, and data only moves one
+  way. The kit is terminated at the input end.
+- Wire the output end instead and **nothing lights, with no error at all.**
+  Every chip sits waiting for data that never arrives.
+- That is the day's most common silent failure, and pre-wiring buys the time
+  back for the parts of the class they'll actually remember.
+
+### Rules on the whiteboard
+
+1. **Unplug USB before touching any wire.**
+2. Don't let the bare `+5V` and `GND` wires touch each other.
+3. If a jumper pops out of the breadboard, put it back in the row it came
+   from — check against the strip's labels, not from memory.
+
+Two things worth mentioning while you walk the room, even though this class
 doesn't need them:
 
-- Real installs put a **330–470 Ω resistor** in series with the data line (tames
-  reflections on the wire) and a **1000 µF capacitor** across 5V and GND at the
-  strip (absorbs the inrush when every LED switches at once).
-- **Ground must be shared.** "Voltage" is always a *difference*. If the strip and
-  the board don't share a ground, the strip has no reference for what 3.3V even
-  means, and the data is meaningless. This is the #1 mistake when the strip gets
-  its own power supply later.
+- Real installs put a **330–470 Ω resistor** in series with the data line
+  (tames reflections on the wire) and a **1000 µF capacitor** across 5V and GND
+  at the strip (absorbs the inrush when every LED switches at once).
+- **Ground must be shared.** This is the #1 mistake when the strip gets its own
+  power supply later.
 
 ---
 
-## 0:24 – 0:34 · PlatformIO: build and upload
+## 0:22 – 0:34 · PlatformIO: build and upload
 
 Open `workshops/programming-leds/firmware/` in VS Code — PlatformIO needs the
 folder holding `platformio.ini`, not the repository root. Give them the mental

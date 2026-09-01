@@ -1,17 +1,45 @@
 # Programming LEDs — Parts
 
-One kit per student, or per pair if boards are short. Quantities are for a
-class of 10 plus the spares you will need.
+Kits are **assembled and wired before class** and handed out ready to plug in.
+Students bring only a laptop and a USB-C data cable — see
+[`STUDENT_GUIDE.md`](STUDENT_GUIDE.md) for what they are told.
+
+![An assembled kit: ESP32-C3 on a breadboard, wired to a WS2812B strip on a wood backing](assets/kit-wired.jpg)
 
 ## Per student
 
 | Item | Qty | Notes |
 |---|---|---|
-| ESP32-C3 dev board | 1 | `esp32-c3-devkitm-1` or compatible (Seeed XIAO ESP32C3, etc.) |
-| WS2812B strip, ~10 LEDs | 1 | Pre-cut, with the 3 wires already tinned or terminated |
-| USB-C **data** cable | 1 | Not charge-only — see below |
-| Jumper wires or screw terminal | 3 | If the class is not soldering |
-| Laptop | 1 | VS Code + PlatformIO installed **before** class |
+| ESP32-C3 dev board | 1 | `esp32-c3-devkitm-1` or compatible (Seeed XIAO ESP32C3, ESP32-C3 SuperMini) |
+| Half-size or mini breadboard | 1 | Board is pre-seated in it; students never wire from scratch |
+| WS2812B strip on a wood backing | 1 | Rigid backing so the strip survives a room full of beginners handling it |
+| 3-pin header on the strip's input leads | 1 | Pre-attached, plugs straight into the breadboard |
+| Jumper wires, breadboard to header | 3 | +5V, GND, and data to GPIO 4 — pre-wired |
+
+Students supply the laptop and the USB-C cable.
+
+## Why the kits ship pre-wired
+
+The strip's data line is one-directional: each LED keeps the first color it
+receives and passes the rest down the chain. Feed the wrong end and nothing
+lights, with no error of any kind. Pre-terminating the input end removes the
+day's most common silent failure and buys back the wiring time for the parts
+of the class students actually remember.
+
+Keep the wiring *visible* rather than hidden — the three-wire story (power,
+ground, data) is a teaching point, and students should be able to trace each
+wire with a finger.
+
+## Assembly, per kit
+
+1. Mount the strip on the wood backing, input end free.
+2. Solder three leads to the strip's `+5V`, `Din`, and `GND` pads and terminate
+   them in a 3-pin header.
+3. Seat the ESP32-C3 in the breadboard.
+4. Jumper the header to the board: `+5V` → 5V, `GND` → GND, `Din` → **GPIO 4**.
+5. Power it up and confirm the strip lights before it goes in a kit bag.
+6. **Count the LEDs and set `NUM_LEDS` to match**, or leave it deliberately
+   wrong and make finding it the room's first exercise — see `CLASS_PLAN.md`.
 
 ## Instructor spares
 
@@ -19,21 +47,23 @@ Bring at least 2 of each. Something is always dead on arrival.
 
 | Item | Qty |
 |---|---|
-| ESP32-C3 dev board | 2 |
-| WS2812B strip | 2 |
-| USB-C data cable | 2 |
+| Fully assembled kit | 2 |
+| USB-C **data** cable | 4 |
+| Loose jumper wires | 10 |
 | USB power meter | 1 (optional — makes the current budget discussion real) |
 
 ## The cable
 
-**Test every cable before class.** A charge-only USB cable is the single most
-common reason a student cannot flash a board, it accounts for roughly 70% of
-"no serial port" failures, and it is indistinguishable from a working cable by
-sight. Plug each one into a board and confirm a serial port appears.
+Students are asked to bring their own, and some will bring the wrong one.
+
+**Test every spare cable before class.** A charge-only USB cable has power
+wires but no data wires, is visually identical to a working one, and accounts
+for roughly 70% of "no serial port" failures. Plug each spare into a board and
+confirm a serial port appears.
 
 ## Not needed for this workshop
 
-Real installations want these; a 10-LED strip on a bench does not, and adding
+Real installations want these; a short strip on a bench does not, and adding
 them costs class time. Mention them, do not hand them out:
 
 - **330–470 Ω resistor** in series with the data line — tames reflections on

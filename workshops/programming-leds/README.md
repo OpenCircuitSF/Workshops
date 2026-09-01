@@ -8,6 +8,7 @@ animating as soon as it is powered.
 
 | File | For |
 |---|---|
+| [`STUDENT_GUIDE.md`](STUDENT_GUIDE.md) | **Attendees** — what to bring, what to install beforehand, what to expect. Send this out ahead of class. |
 | [`CLASS_PLAN.md`](CLASS_PLAN.md) | **Instructors** — minute-by-minute timeline, teaching notes, troubleshooting cheat sheet |
 | [`parts.md`](parts.md) | **Instructors** — per-student kit and what to buy |
 | This README | **Attendees** — what it does, how to build it, what to change |
