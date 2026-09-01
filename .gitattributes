@@ -1,0 +1,49 @@
+# Normalize line endings to LF on commit
+* text=auto eol=lf
+
+# Markdown and docs — the primary content of this repository
+*.md text eol=lf
+
+# C / C++ firmware
+*.c text eol=lf
+*.cc text eol=lf
+*.cpp text eol=lf
+*.h text eol=lf
+*.hpp text eol=lf
+*.ino text eol=lf
+
+# PlatformIO and project config
+*.ini text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.csv text eol=lf
+
+# Shell scripts and Python helpers
+*.sh text eol=lf
+*.py text eol=lf
+
+# Diagram sources
+*.svg text eol=lf
+*.fzz binary
+
+# Images and media used in workshop guides — no line-ending conversion
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.pdf binary
+*.mp4 binary
+*.mov binary
+
+# Prebuilt firmware images handed to attendees who cannot get a toolchain
+# running. Byte-exact by definition.
+*.bin binary
+*.hex binary
+*.elf binary
+
+# Diff hunk headers for C++ show the enclosing function, not just line numbers.
+*.cpp diff=cpp
+*.h diff=cpp
+*.hpp diff=cpp
