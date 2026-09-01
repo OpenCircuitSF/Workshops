@@ -35,8 +35,17 @@ compile_commands.json
 *.d
 
 # ── Editors ───────────────────────────────────────────────────────────────────
-.vscode/
-!.vscode/extensions.json
+# PlatformIO regenerates most of .vscode/ on every build with absolute paths
+# from whoever built last. extensions.json is hand-written and shared, so it is
+# excluded by pattern rather than by re-including it — git will not reconsider
+# a file inside an excluded directory, so `.vscode/` + a negation would not
+# have worked.
+# The `**/` matters: a pattern with an internal slash is anchored to this file's
+# directory, so a bare `.vscode/*` would only cover the repo root and miss every
+# per-workshop firmware project.
+**/.vscode/*
+!**/.vscode/extensions.json
+**/.vscode/ipch/
 .idea/
 *.swp
 *~

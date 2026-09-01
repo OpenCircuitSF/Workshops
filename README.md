@@ -20,14 +20,21 @@ used on the website.
 
 ```
 workshops/
-  esp32-blink/
+  programming-leds/
     README.md            # the guide attendees follow, start to finish
+    CLASS_PLAN.md        # instructor timeline and teaching notes
     parts.md             # bill of materials, with sources and rough cost
     firmware/            # PlatformIO project (platformio.ini, src/, lib/)
       platformio.ini
       src/main.cpp
     assets/              # wiring diagrams, photos, pinout images
 ```
+
+## Workshops
+
+| Workshop | Length | Level | Builds |
+|---|---|---|---|
+| [Programming LEDs](workshops/programming-leds/) | 60 min | Beginner | ESP32-C3 driving a WS2812B strip through a blending color palette |
 
 Shared material lives at the top level:
 
