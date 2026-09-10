@@ -22,9 +22,9 @@
 
 static const char *TAG = "LEDS";
 
-#define NUM_LEDS   11
+#define NUM_LEDS   8
 #define DATA_PIN   4
-#define BRIGHTNESS 128
+#define BRIGHTNESS 50
 
 // USB CDC enumeration window. Serial output written before this elapses is
 // dropped by the host, so the banner waits it out without blocking.
